@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+// This comment should only be here in the gridMovement branch
 public class PlayerBehavior : MonoBehaviour
 {
   enum Direction

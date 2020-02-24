@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-// This comment should only be here in the gridMovement branch
+
 public class PlayerBehavior : MonoBehaviour
 {
   enum Direction
@@ -19,10 +19,14 @@ public class PlayerBehavior : MonoBehaviour
   // Adjustable variables
   public float dashSpeed;
   public float stopDistance;
+  public float verticalOffset;
 
   // caching variables
   private float x;
   private float y;
+
+  private Vector3Int gridCoords;
+
 
   private Vector3 dash;
 
@@ -33,7 +37,7 @@ public class PlayerBehavior : MonoBehaviour
   private Vector3 dest;
 
   // Grid X and y that player will try to move to
-  private Vector2 gridDest;
+  private Vector3Int gridDest;
 
   private bool moving;
 
@@ -55,6 +59,7 @@ public class PlayerBehavior : MonoBehaviour
   {
     x = tr.position.x;
     y = tr.position.y;
+    gridCoords = grid.WorldToCell(tr.position);
 
     if (x == dest.x && y == dest.y)
     {
@@ -74,8 +79,8 @@ public class PlayerBehavior : MonoBehaviour
         }
         else
         {
-          dest.y = y + 1;
-          dest.x = x;
+          gridDest.y = gridCoords.y + 1;
+          gridDest.x = gridCoords.x;
           moving = true;
         }
       }
@@ -89,8 +94,8 @@ public class PlayerBehavior : MonoBehaviour
         }
         else
         {
-          dest.x = x - 1;
-          dest.y = y;
+          gridDest.x = gridCoords.x - 1;
+          gridDest.y = gridCoords.y;
           moving = true;
         }
       }
@@ -104,8 +109,8 @@ public class PlayerBehavior : MonoBehaviour
         }
         else
         {
-          dest.y = y - 1;
-          dest.x = x;
+          gridDest.y = gridCoords.y - 1;
+          gridDest.x = gridCoords.x;
           moving = true;
         }
       }
@@ -119,8 +124,8 @@ public class PlayerBehavior : MonoBehaviour
         }
         else
         {
-          dest.x = x + 1;
-          dest.y = y;
+          gridDest.x = gridCoords.x + 1;
+          gridDest.y = gridCoords.y;
           moving = true;
         }
       }
@@ -128,6 +133,18 @@ public class PlayerBehavior : MonoBehaviour
       // Update animation direction
       an.SetInteger("direction", (int)direction);
 
+      // If you moved during this turn
+      if (moving)
+      {
+        // Check if the tile you're moving to is valid
+        //if (grid.)
+        grid.
+        dest = grid.CellToWorld(gridDest);
+        dest.x += grid.cellSize.x / 2;
+        dest.y += grid.cellSize.y / 2;
+        // Account for vertical offset
+        dest.y += verticalOffset;
+      }
 
     }
 

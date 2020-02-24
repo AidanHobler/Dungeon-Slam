@@ -800,6 +800,7 @@ MonoBehaviour:
   grid: {fileID: 733235153}
   dashSpeed: 15
   stopDistance: 0.1
+  verticalOffset: 0.3
 --- !u!95 &2063778969
 Animator:
   serializedVersion: 3

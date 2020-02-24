@@ -138,7 +138,7 @@ public class PlayerBehavior : MonoBehaviour
       {
         // Check if the tile you're moving to is valid
         //if (grid.)
-        grid.
+
         dest = grid.CellToWorld(gridDest);
         dest.x += grid.cellSize.x / 2;
         dest.y += grid.cellSize.y / 2;
